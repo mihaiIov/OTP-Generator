@@ -16,12 +16,11 @@ namespace OTP_handler
         }
         public string GenerateOTP(string userId, DateTime dateTime)
         {
-            
-            throw new NotImplementedException();
+           return Totp.ComputeTotp(dateTime);
         }
         public bool AttemptValidation(string otp) 
         {
-            throw new NotImplementedException ();
+            return Totp.VerifyTotp(otp, out long timeStepMatched);
         }
 
     }
