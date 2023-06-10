@@ -20,7 +20,7 @@ namespace OTP_handler
         }
         public bool AttemptValidation(string otp) 
         {
-            return Totp.VerifyTotp(otp, out long timeStepMatched);
+            return Totp.VerifyTotp(otp, out long timeStepMatched, VerificationWindow.RfcSpecifiedNetworkDelay);
         }
 
     }

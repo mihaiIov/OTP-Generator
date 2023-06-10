@@ -36,7 +36,7 @@ try
                     Console.WriteLine("Input your OTP for validation:");
                     otpInputted = Console.ReadLine();
                     otpValidity = handler.AttemptValidation(otpInputted);
-                    isValidText = otpValidity ? "OTP Correct, welcome in" : "OTP Incorrect or expired";
+                    isValidText = otpValidity ? "OTP correct, welcome!" : "OTP incorrect or expired";
                     consoleColorFormatting = otpValidity ? ConsoleColor.Green : ConsoleColor.Red;
                     Console.ForegroundColor = consoleColorFormatting;
                     Console.WriteLine(isValidText);
