@@ -1,15 +1,45 @@
-﻿namespace OTP_handler
+﻿using OtpNet;
+
+namespace OTP_handler
 {
-    public static class Handler
+    public class OTPHandler
     {
-        public static string GenerateOTP(string userId, DateTime dateTime)
-        {
-            
-            throw new NotImplementedException();
+        private byte[] secretBytes;
+        private Totp totp;
+        private byte[] SecretBytes { get => secretBytes; set => secretBytes = value; }
+        private Totp Totp { get => totp; set => totp = value; }
+
+        public OTPHandler()
+        {   
+
+            secretBytes = KeyGeneration.GenerateRandomKey(OtpHashMode.Sha512);
+            this.Totp = new Totp(secretBytes, mode: OtpHashMode.Sha512);
         }
-        public static bool AttemptValidation(string otp) 
+        public string GenerateOTP(string userId, DateTime dateTime)
         {
-            throw new NotImplementedException ();
+            try
+            {
+                return Totp.ComputeTotp();
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+           
+        }
+        public bool AttemptValidation(string otp) 
+        {
+            try
+            {
+                return Totp.VerifyTotp(otp, out long timeStepMatched, VerificationWindow.RfcSpecifiedNetworkDelay);
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            
         }
 
     }
