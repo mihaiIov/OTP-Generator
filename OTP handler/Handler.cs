@@ -10,17 +10,36 @@ namespace OTP_handler
         private Totp Totp { get => totp; set => totp = value; }
 
         public OTPHandler()
-        {
+        {   
+
             secretBytes = KeyGeneration.GenerateRandomKey(OtpHashMode.Sha512);
             this.Totp = new Totp(secretBytes, mode: OtpHashMode.Sha512);
         }
         public string GenerateOTP(string userId, DateTime dateTime)
         {
-           return Totp.ComputeTotp(dateTime);
+            try
+            {
+                return Totp.ComputeTotp();
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+           
         }
         public bool AttemptValidation(string otp) 
         {
-            return Totp.VerifyTotp(otp, out long timeStepMatched, VerificationWindow.RfcSpecifiedNetworkDelay);
+            try
+            {
+                return Totp.VerifyTotp(otp, out long timeStepMatched, VerificationWindow.RfcSpecifiedNetworkDelay);
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            
         }
 
     }
