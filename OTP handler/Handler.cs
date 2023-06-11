@@ -16,7 +16,7 @@ namespace OTP_handler
         }
         public string GenerateOTP(string userId, DateTime dateTime)
         {
-           return Totp.ComputeTotp(dateTime);
+           return Totp.ComputeTotp();
         }
         public bool AttemptValidation(string otp) 
         {
